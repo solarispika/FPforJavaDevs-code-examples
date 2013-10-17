@@ -83,4 +83,16 @@ public class ListHeadTailTest {
     List<String> list1 = list("one", list("two", list("three", EMPTYLS)));
     assertEquals("(one, (two, (three, ())))", list1.toString());
   }
+
+  @Test
+  public void ListCreateFromVarArgs() {
+    List<Integer> list1 = list(1, 2, 3, 4);
+    assertEquals("(1, (2, (3, (4, ()))))", list1.toString());
+  }
+
+  @Test
+  public void ListCreateFromVarArgsEmpty() {
+    List<Integer> list1 = list();
+    assertEquals("()", list1.toString());
+  }
 }

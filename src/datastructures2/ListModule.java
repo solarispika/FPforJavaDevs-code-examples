@@ -1,4 +1,5 @@
 package datastructures2;
+import java.util.Arrays;
 import functions.*;
 
 public class ListModule {
@@ -100,4 +101,12 @@ public class ListModule {
   public static <T> List<T> list(T head, List<T> tail) {
     return new NonEmptyList<T>(head, tail);
   }
+
+  @SafeVarargs
+  public static <T> List<T> list(T ... elems) {
+    if (elems.length == 0)
+      return emptyList();
+    return new NonEmptyList<T>(elems[0], list(Arrays.copyOfRange(elems, 1, elems.length)));
+  }
 }
+
