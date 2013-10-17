@@ -5,6 +5,9 @@ TESTS = \
 	datastructures2.FunctionCombinatorTest \
 	datastructures2.ListHeadTailTest \
 	datastructures2.ListTest \
+	datastructures3.FunctionCombinatorTest \
+	datastructures3.ListHeadTailTest \
+	datastructures3.ListTest \
 	equals.MutableEqualsTest \
 	functions.FunctionTypeTest \
 	functions.RecursionTest \
