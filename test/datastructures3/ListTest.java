@@ -2,7 +2,7 @@ package datastructures3;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import static datastructures2.ListModule.*;
+import static datastructures3.ListModule.*;
 import functions.*;
 
 /**

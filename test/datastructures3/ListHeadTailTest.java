@@ -2,7 +2,7 @@ package datastructures3;
 import org.junit.*;
 import java.util.Map;
 import static org.junit.Assert.*;
-import static datastructures2.ListModule.*;
+import static datastructures3.ListModule.*;
 
 /**
  * This test is identical to datastructures.ListTest. That is, it
@@ -23,31 +23,21 @@ public class ListHeadTailTest {
     assertEquals(emptyLMSL, EMPTYLL);
   }
 
-  @Test(expected = EmptyListHasNoHead.class)
-  public void callingHeadOnAnEmptyListRaises() {
-    EMPTYLS.head();
-  }
-
-  @Test(expected = EmptyListHasNoTail.class)
-  public void callingTailOnAnEmptyListRaises() {
-    EMPTYLS.tail();
-  }
-
   @Test
   public void callingTailOnAOneElementListReturnsAnEmptyList() {
-    List<String> tail = list("one", EMPTYLS).tail();
+    List<String> tail = list("one", EMPTYLS).tail().get();
     assertEquals(emptyList(), tail);
   }
 
   @Test
   public void callingTailOnAListWithMultiplelementsReturnsANonEmptyList() {
-    List<String> tail = list("one", list("two", list("three", EMPTYLS))).tail();
+    List<String> tail = list("one", list("two", list("three", EMPTYLS))).tail().get();
     assertEquals(list("two", list("three", EMPTYLS)), tail);
   }
 
   @Test
   public void callingHeadOnANonEmptyListReturnsTheHead() {
-    String head = list("one", EMPTYLS).head();
+    String head = list("one", EMPTYLS).head().get();
     assertEquals("one", head);
   }
 

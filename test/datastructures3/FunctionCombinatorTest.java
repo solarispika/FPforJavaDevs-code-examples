@@ -1,10 +1,10 @@
 package datastructures3;
 import org.junit.Test;
 
-import datastructures2.ListModule.List;
+import datastructures3.ListModule.List;
 import static org.junit.Assert.*;
 import functions.*;
-import static datastructures2.ListModule.*;
+import static datastructures3.ListModule.*;
 
 public class FunctionCombinatorTest {
   private static final List<Integer> EMPTYLI = emptyList();
