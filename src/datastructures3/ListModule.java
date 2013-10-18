@@ -32,15 +32,22 @@ public class ListModule {
     private final List<T> _tail;
 
     public List<T> filter (Function1<T,Boolean> f) {
-      if (f.apply(head().get())) {                                   // #2
-        return list(head().get(), tail().get().filter(f));           // #3
-      } else {
-        return tail().get().filter(f);                               // #4
-      }
+      return foldRight(emptyList(), new Function2<T,List<T>,List<T>>() {
+        public List<T> apply(T elem, List<T> acc) {
+          if (f.apply(elem))
+            return list(elem, acc);
+          else
+            return acc;
+        }
+      });
     }
 
     public <T2> List<T2> map (Function1<T,T2> f) {
-      return list(f.apply(head().get()), tail().get().map(f));       // #6
+      return foldRight(emptyList(), new Function2<T,List<T2>,List<T2>>() {
+        public List<T2> apply(T elem, List<T2> acc) {
+          return list(f.apply(elem), acc);
+        }
+      });
     }
 
     public <T2> T2 foldLeft (T2 seed, Function2<T2,T,T2> f) {
