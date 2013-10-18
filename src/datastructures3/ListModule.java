@@ -1,5 +1,6 @@
 package datastructures3;
 import java.util.Arrays;
+import java.util.Stack;
 import functions.*;
 import option.*;
 
@@ -51,11 +52,29 @@ public class ListModule {
     }
 
     public <T2> T2 foldLeft (T2 seed, Function2<T2,T,T2> f) {
-      return tail().get().foldLeft(f.apply(seed, head().get()), f);  // #8
+      List<T> tmp = this;
+      T2 tmp_seed = seed;
+      while (!tmp.equals(emptyList())) {
+        tmp_seed = f.apply(tmp_seed, tmp.head().get());
+        tmp = tmp.tail().get();
+      }
+      return tmp_seed;
     }
 
     public <T2> T2 foldRight (T2 seed, Function2<T,T2,T2> f) {
-      return f.apply(head().get(), tail().get().foldRight(seed, f)); // #10
+      List<T> tmp = this;
+      Stack<T> stack = new Stack<T>();
+      T2 tmp_seed = seed;
+
+      while (!tmp.equals(emptyList())) {
+        stack.push(tmp.head().get());
+        tmp = tmp.tail().get();
+      }
+      while (!stack.empty()) {
+        T elem = stack.pop();
+        tmp_seed = f.apply(elem, tmp_seed);
+      }
+      return tmp_seed;
     }
 
     public void foreach (Function1Void<T> f) {
