@@ -69,6 +69,13 @@ public class ListHeadTailTest {
   }
 
   @Test
+  public void TwoNonEmptyListsAreNotEqualIfTheirSizesAreDifferentReverse() {
+    List<String> list2 = list("one", EMPTYLS);
+    List<String> list1 = list("one", list("two", EMPTYLS));
+    assertFalse(list1.equals(list2));
+  }
+
+  @Test
   public void ListsAreRecursiveStructures() {
     List<String> list1 = list("one", list("two", list("three", EMPTYLS)));
     assertEquals("(one, (two, (three, ())))", list1.toString());

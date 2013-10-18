@@ -57,18 +57,37 @@ public class ListModule {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean equals(Object other) {
       if (other == null || getClass() != other.getClass())
         return false;
-      List<?> that = (List<?>) other;
-      return head().equals(that.head()) && tail().equals(that.tail());
+      List<T> that = (List<T>) other;
+      Option<List<T>> rr = foldLeft(new Some<List<T>>(that),
+          new Function2<Option<List<T>>,T,Option<List<T>>>() {
+          public Option<List<T>> apply(Option<List<T>> rem, T elem) {
+            if (!rem.hasValue() ||
+                !rem.get().head().hasValue() ||
+                !rem.get().head().get().equals(elem))
+              return new None<List<T>>();
+            else
+              return rem.get().tail();
+          }
+      });
+      return rr.hasValue() && rr.get().isEmpty();
     }
 
     @Override
     public int hashCode() { return 37*(head().get().hashCode()+tail().get().hashCode()); }
 
     @Override
-    public String toString() { return "(" + head().get() + ", " + tail().get() + ")"; }
+    public String toString() {
+      return foldRight("()", new Function2<T, String, String>() {
+          public String apply(T elem, String acc) {
+            acc = "(" + elem + ", " + acc + ")";
+            return acc;
+          }
+        });
+    }
   }
 
   public static final List<? extends Object> EMPTY = new List<Object>() {
