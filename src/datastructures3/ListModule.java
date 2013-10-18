@@ -124,4 +124,12 @@ public class ListModule {
       return emptyList();
     return new NonEmptyList<T>(elems[0], list(Arrays.copyOfRange(elems, 1, elems.length)));
   }
+
+  public static <T> List<T> reverse(List<T> list) {
+    return list.foldLeft(emptyList(), new Function2<List<T>,T,List<T>>() {
+      public List<T> apply(List<T> acc, T elem) {
+        return list(elem, acc);
+      }
+    });
+  }
 }

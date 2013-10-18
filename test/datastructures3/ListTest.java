@@ -120,4 +120,11 @@ public class ListTest {
       public void apply(Float item) { assertEquals(2.2F, item, 0.01); }
     });
   }
+
+  @Test
+  public void listReverse() {
+    List<Integer> list1 = list(1,2,3,4);
+    List<Integer> list2 = list(4,3,2,1);
+    assertEquals(list1, reverse(list2));
+  }
 }
